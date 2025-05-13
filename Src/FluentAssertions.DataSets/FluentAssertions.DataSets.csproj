@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
-    <Authors>Dennis Doomen;Jonathan Gilbert</Authors>
+    <Authors>AwesomeAssertions, Dennis Doomen, Jonas Nyrup and contributors</Authors>
     <PackageDescription>
       Extensions to Awesome Assertions 8+ for dealing with DataSets and DataTables.
     </PackageDescription>
@@ -28,7 +28,7 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>AwesomeAssertions.png</PackageIcon>
     <PackageReleaseNotes>https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/releases</PackageReleaseNotes>
-    <Copyright>Copyright 2024-$([System.DateTime]::Now.ToString(yyyy)) Xceed Software Inc., all rights reserved</Copyright>
+    <Copyright>Copyright Dennis Doomen 2010-2025, AwesomeAssertions 2025-</Copyright>
   </PropertyGroup>
 
   <ItemGroup Label="Internals visible to">
