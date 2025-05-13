@@ -11,20 +11,23 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+    <PackageId>AwesomeAssertions.DataSets</PackageId>
+    <Company>AwesomeAssertions</Company>
+    <Product>AwesomeAssertions</Product>
   </PropertyGroup>
 
   <PropertyGroup Label="Package info">
     <Authors>Dennis Doomen;Jonathan Gilbert</Authors>
     <PackageDescription>
-      Extensions to Fluent Assertions 8+ for dealing with DataSets and DataTables.
+      Extensions to Awesome Assertions 8+ for dealing with DataSets and DataTables.
     </PackageDescription>
-    <PackageProjectUrl>https://www.fluentassertions.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/fluentassertions/fluentassertions.datasets</RepositoryUrl>
+    <PackageProjectUrl>https://www.awesomeassertions.org</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageIcon>FluentAssertions.png</PackageIcon>
-    <PackageReleaseNotes>https://github.com/fluentassertions/fluentassertions.datasets/releases</PackageReleaseNotes>
+    <PackageIcon>AwesomeAssertions.png</PackageIcon>
+    <PackageReleaseNotes>https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/releases</PackageReleaseNotes>
     <Copyright>Copyright 2024-$([System.DateTime]::Now.ToString(yyyy)) Xceed Software Inc., all rights reserved</Copyright>
   </PropertyGroup>
 
@@ -35,13 +38,13 @@
   </ItemGroup>
 
   <ItemGroup Label="Package files">
-    <None Include="..\FluentAssertions.png" Pack="true" Visible="false" PackagePath="" />
+    <None Include="..\AwesomeAssertions.png" Pack="true" Visible="false" PackagePath="" />
     <None Include="..\..\readme.md" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup Label="Analyzers">
     <AdditionalFiles Include="BannedSymbols.txt" />
-    <PackageReference Include="FluentAssertions" Version="8.0.0" />
+    <PackageReference Include="AwesomeAssertions" Version="8.0.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="PolySharp" Version="1.15.0" PrivateAssets="all" />

@@ -1,21 +1,22 @@
-# FluentAssertions for DataSets
+# AwesomeAssertions for DataSets
 
-[![](https://img.shields.io/github/actions/workflow/status/fluentassertions/fluentassertions.datasets/build.yml?branch=main)](https://github.com/fluentassertions/fluentassertions.datasets/actions?query=branch%3Amain)
-[![Coveralls branch](https://img.shields.io/coverallsCoverage/github/fluentassertions/fluentassertions.datasets?branch=develop)](https://coveralls.io/github/fluentassertions/fluentassertions.datasets?branch=develop)
-[![](https://img.shields.io/github/release/FluentAssertions.Datasets/FluentAssertions.Datasets.svg?label=latest%20release&color=007edf)](https://github.com/FluentAssertions/FluentAssertions.DataSets/releases/latest)
-[![](https://img.shields.io/nuget/dt/FluentAssertions.DataSets.svg?label=downloads&color=007edf&logo=nuget)](https://www.nuget.org/packages/FluentAssertions.DataSets)
-[![](https://img.shields.io/librariesio/dependents/nuget/FluentAssertions.DataSets.svg?label=dependent%20libraries)](https://libraries.io/nuget/FluentAssertions.DataSets)
-[![GitHub Repo stars](https://img.shields.io/github/stars/fluentassertions/fluentassertions.datasets)](https://github.com/fluentassertions/fluentassertions.datasets/stargazers)
-[![GitHub contributors](https://img.shields.io/github/contributors/fluentassertions/fluentassertions.datasets)](https://github.com/fluentassertions/fluentassertions.datasets/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/fluentassertions/fluentassertions.datasets)](https://github.com/fluentassertions/fluentassertions.datasets)
-[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/fluentassertions/fluentassertions.datasets)](https://github.com/fluentassertions/fluentassertions.datasets/graphs/commit-activity)
-[![open issues](https://img.shields.io/github/issues/fluentassertions/fluentassertions.datasets)](https://github.com/fluentassertions/fluentassertions.datasets/issues)
+[![](https://img.shields.io/github/actions/workflow/status/AwesomeAssertions/AwesomeAssertions.DataSets/build.yml?branch=main)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/actions?query=branch%3Amain)
+[![Coveralls branch](https://img.shields.io/coverallsCoverage/github/AwesomeAssertions/AwesomeAssertions.DataSets?branch=main)](https://coveralls.io/github/AwesomeAssertions/AwesomeAssertions.DataSets?branch=main)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AwesomeAssertions_AwesomeAssertions.DataSets&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AwesomeAssertions_AwesomeAssertions.DataSets)
+[![](https://img.shields.io/github/release/AwesomeAssertions/AwesomeAssertions.DataSets.svg?label=latest%20release&color=007edf)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/releases/latest)
+[![](https://img.shields.io/nuget/dt/AwesomeAssertions.DataSets.svg?label=downloads&color=007edf&logo=nuget)](https://www.nuget.org/packages/AwesomeAssertions.DataSets)
+[![](https://img.shields.io/librariesio/dependents/nuget/AwesomeAssertions.DataSets.svg?label=dependent%20libraries)](https://libraries.io/nuget/AwesomeAssertions.DataSets)
+[![GitHub Repo stars](https://img.shields.io/github/stars/AwesomeAssertions/AwesomeAssertions.DataSets)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/stargazers)
+[![GitHub contributors](https://img.shields.io/github/contributors/AwesomeAssertions/AwesomeAssertions.DataSets)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/graphs/contributors)
+[![GitHub last commit](https://img.shields.io/github/last-commit/AwesomeAssertions/AwesomeAssertions.DataSets)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/AwesomeAssertions/AwesomeAssertions.DataSets)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/graphs/commit-activity)
+[![open issues](https://img.shields.io/github/issues/AwesomeAssertions/AwesomeAssertions.DataSets)](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/issues)
 ![](https://img.shields.io/badge/release%20strategy-githubflow-orange.svg)
 
-Extends https://www.fluentassertions.com with specialized assertions for dealing with `DataSet`, `DataTable`, `DataRow` and `DataColumn`
+Extends https://www.awesomeassertions.org with specialized assertions for dealing with `DataSet`, `DataTable`, `DataRow` and `DataColumn`
 
 > [!WARNING]
-> This set of extensions was extracted from Fluent Assertions 8 and is in maintenance mode. Pull Requests will still be accepted, but we will not actively work on improvements or bugs.
+> This set of extensions was extracted from Awesome Assertions 8 and is in maintenance mode. Pull Requests will still be accepted, but we will not actively work on improvements or bugs.
 
 # Information
 * Uses [Semantic Versioning](https://semver.org/lang/nl/)
@@ -24,9 +25,9 @@ Extends https://www.fluentassertions.com with specialized assertions for dealing
 
 # Installation
 
-This package is shipped as a [NuGet package](https://www.nuget.org/packages/FluentAssertions.DataSets) and can be installed through the CLI using:
+This package is shipped as a [NuGet package](https://www.nuget.org/packages/AwesomeAssertions.DataSets) and can be installed through the CLI using:
 
-    dotnet add package FluentAssertions.DataSets
+    dotnet add package AwesomeAssertions.DataSets
 
 # Developing
 
@@ -114,7 +115,7 @@ The following assertions are available on `DataRow` objects:
 * `.Should().HaveColumn(columnName)`, `.Should().HaveColumns(columnName, columnName, ...)`: Asserts that the `DataTable`'s `Columns` collection contains at least columns with the specified names. Additional columns are ignored.
 * `.Should().BeEquivalentTo(dataRow)`: Performs a deep equivalency comparison between the subject and the expectation. This includes comparing field values, for which the defined columns must match.
 
-When checking the equivalency of two `DataRow` objects, by default the `RowState` must match. But, if this is overridden using equivalency assertion options (`.Excluding(row => row.RowState)`), two `DataRow` objects with differing `RowState`s can still be considered equivalent based on their field values. FluentAssertions automatically determines which _version_ of field values to use in the subject and the expectation separately.
+When checking the equivalency of two `DataRow` objects, by default the `RowState` must match. But, if this is overridden using equivalency assertion options (`.Excluding(row => row.RowState)`), two `DataRow` objects with differing `RowState`s can still be considered equivalent based on their field values. AwesomeAssertions automatically determines which _version_ of field values to use in the subject and the expectation separately.
 
 * For `DataRowState.Unchanged`, field values for `DataRowVersion.Current` are used.
 * For `DataRowState.Added`, field values for `DataRowVersion.Current` are used.
