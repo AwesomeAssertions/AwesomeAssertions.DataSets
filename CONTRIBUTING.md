@@ -1,12 +1,12 @@
-# Contributing to Fluent Assertions for DataSets
+# Contributing to Awesome Assertions for DataSets
 
 Few open-source projects are going to be successful without contributions.
-Fluent Assertions for DataSets is no exception and we are deeply grateful for all contributions no matter their size.
+Awesome Assertions for DataSets is no exception and we are deeply grateful for all contributions no matter their size.
 However, to improve that collaboration this document presents a few steps to smoothen the process.
 
 ## Finding Existing Issues
 
-Before filing a new issue, please search our [issues](https://github.com/fluentassertions/fluentassertions.datasets/issues) to check if it already exists.
+Before filing a new issue, please search our [issues](https://github.com/AwesomeAssertions/AwesomeAssertions.datasets/issues) to check if it already exists.
 
 If you do find an existing issue, please include your own feedback in the discussion.
 Instead of posting "me too", upvote the issue with 👍, as this better helps us prioritize popular issues and avoids spamming people subscribing to the issue.
@@ -23,7 +23,7 @@ Ideally, a bug report should contain the following information:
 * Information on the environment: nuget version, .NET version, etc.
 * Additional information, e.g. is it a regression from previous versions? are there any known workarounds?
 
-When ready to submit a bug report, please use the [Bug Report issue template](https://github.com/fluentassertions/fluentassertions.datasets/issues/new?labels=&template=01_bug_report.yml).
+When ready to submit a bug report, please use the [Bug Report issue template](https://github.com/AwesomeAssertions/AwesomeAssertions.datasets/issues/new?labels=&template=01_bug_report.yml).
 
 #### Why are Minimal Reproductions Important?
 
@@ -44,12 +44,12 @@ Stack Overflow has a great article about [how to create a minimal, reproducible 
 
 ## Contributing Changes
 
-Fluent Assertions exposes many extension knobs to write custom assertions or extend over existing assertions.
+Awesome Assertions exposes many extension knobs to write custom assertions or extend over existing assertions.
 As such the core library very rarely takes extra dependencies to provide assertion on someone's favorite library.
-Instead we suggest that you create a dedicated library as we did with [FluentAssertions.Json](https://github.com/fluentassertions/fluentassertions.json).
-See the [documentation](https://fluentassertions.com/extensibility/) for more information about extensibility.
+Instead we suggest that you create a dedicated library as we did with [AwesomeAssertions.Json](https://github.com/AwesomeAssertions/AwesomeAssertions.json).
+See the [documentation](https://awesomeassertions.org/extensibility/) for more information about extensibility.
 
-In order for Fluent Assertions to provide a consistent experience across the library, we generally want to review every single API that is added, changed or deleted.
+In order for Awesome Assertions to provide a consistent experience across the library, we generally want to review every single API that is added, changed or deleted.
 Changes to the API must be proposed, discussed and approved with the `api-approved` label in a separate issue before opening a PR.
 Sometimes the implementation leads to new knowledge such that the approved API must be reevaluated.
 If you're unsure about whether a change fits the library we suggest you open an issue first to avoid wasting your time if the changes does not fit the project.
@@ -58,7 +58,7 @@ Also we balance whether proposed features are too niche or complex to pull their
 A feature proposal so to speak starts at [-100 points](https://web.archive.org/web/20200112182339/https://blogs.msdn.microsoft.com/ericgu/2004/01/12/minus-100-points/) and needs to prove its worth.
 Remember that a rejection of an API approval is not necessarily a rejection of your idea, but merely a rejection of including it in the core library.
 
-When ready to submit a proposal, please use the [API Suggestion issue template](https://github.com/fluentassertions/fluentassertions/issues/new?labels=api-suggestion&template=02_api_proposal.yml&title=%5BAPI+Proposal%5D%3A+).
+When ready to submit a proposal, please use the [API Suggestion issue template](https://github.com/AwesomeAssertions/AwesomeAssertions/issues/new?labels=api-suggestion&template=02_api_proposal.yml&title=%5BAPI+Proposal%5D%3A+).
 
 Contributions must also satisfy the other published guidelines defined in this document.
 
@@ -66,13 +66,11 @@ Contributions must also satisfy the other published guidelines defined in this d
 
 Please do:
 
-* Target the [Pull Request](https://help.github.com/articles/using-pull-requests) at the `develop` branch.
+* Target the [Pull Request](https://help.github.com/articles/using-pull-requests) at the `main` branch.
 * Follow the style presented in the [Coding Guidelines for C#](https://csharpcodingguidelines.com/).
-* Align with the Fluent Assertions [Design Principles](https://github.com/fluentassertions/fluentassertions/issues/1340)
-* Ensure that changes are covered by a new or existing set of unit tests which follow the Arrange-Act-Assert syntax such as is used [in this example](https://github.com/fluentassertions/fluentassertions/blob/daaf35b9b59b622c96d0c034e8972a020b2bee55/Tests/FluentAssertions.Shared.Specs/BasicEquivalencySpecs.cs#L33).
-  * Also the code coverage reported by the coveralls must be non-decreasing unless accepted by the authors.
-* If the contribution adds a feature or fixes a bug, please update the [**release notes**](https://github.com/fluentassertions/fluentassertions/blob/develop/docs/_pages/releases.md), which is published on the [website](https://fluentassertions.com/releases).
-* If the contribution changes the public API, the changes needs to be included by running [`AcceptApiChanges.ps1`](https://github.com/fluentassertions/fluentassertions/tree/develop/AcceptApiChanges.ps1)/[`AcceptApiChanges.sh`](https://github.com/fluentassertions/fluentassertions/tree/develop/AcceptApiChanges.sh) or using Rider's [Verify Support](https://plugins.jetbrains.com/plugin/17240-verify-support) plug-in.
+* Align with the Awesome Assertions [Design Principles](https://github.com/AwesomeAssertions/AwesomeAssertions/wiki/Design-Guidelines)
+* Ensure that changes are covered by a new or existing set of unit tests which follow the Arrange-Act-Assert syntax such as is used [in this example](https://github.com/AwesomeAssertions/AwesomeAssertions/blob/main/Tests/FluentAssertions.Equivalency.Specs/BasicSpecs.cs#L13).
+* If the contribution changes the public API, the changes needs to be included by running [`AcceptApiChanges.ps1`](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/blob/main/AcceptApiChanges.ps1)/[`AcceptApiChanges.sh`](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/blob/main/AcceptApiChanges.sh) or using Rider's [Verify Support](https://plugins.jetbrains.com/plugin/17240-verify-support) plug-in.
 
 Please do not:
 

@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        We welcome API proposals! We have a process to evaluate the value and shape of new API. There is an overview of our process [here](https://github.com/fluentassertions/fluentassertions/blob/develop/CONTRIBUTING.md#contributing-changes). This template will help us gather the information we need to start the review process.
+        We welcome API proposals! We have a process to evaluate the value and shape of new API. There is an overview of our process [here](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/blob/main/CONTRIBUTING.md#contributing-changes). This template will help us gather the information we need to start the review process.
   - type: textarea
     id: background
     attributes:
