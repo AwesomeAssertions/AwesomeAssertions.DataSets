@@ -103,7 +103,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration.CI)
                 .When(GenerateBinLog is true, _ => _
-                    .SetBinaryLog(ArtifactsDirectory / $"{Solution.Core.FluentAssertions_DataSets.Name}.binlog")
+                    .SetBinaryLog(ArtifactsDirectory / $"{Solution.Core.AwesomeAssertions_DataSets.Name}.binlog")
                 )
                 .EnableNoLogo()
                 .EnableNoRestore()
@@ -132,7 +132,7 @@ class Build : NukeBuild
 
     Project[] Projects => new[]
     {
-        Solution.Specs.FluentAssertions_DataSets_Specs,
+        Solution.Specs.AwesomeAssertions_DataSets_Specs,
     };
 
     Target UnitTestsNetFramework => _ => _
@@ -224,7 +224,7 @@ class Build : NukeBuild
                     ReportTypes.lcov,
                     ReportTypes.HtmlInline_AzurePipelines_Dark)
                 .AddFileFilters("-*.g.cs")
-                .SetAssemblyFilters("+FluentAssertions.DataSets"));
+                .SetAssemblyFilters("+AwesomeAssertions.DataSets"));
 
             string link = TestResultsDirectory / "reports" / "index.html";
             Information($"Code coverage report: \x1b]8;;file://{link.Replace('\\', '/')}\x1b\\{link}\x1b]8;;\x1b\\");
@@ -242,7 +242,7 @@ class Build : NukeBuild
                     .AddPair("Packed version", semVer)));
 
             DotNetPack(s => s
-                .SetProject(Solution.Core.FluentAssertions_DataSets)
+                .SetProject(Solution.Core.AwesomeAssertions_DataSets)
                 .SetOutputDirectory(ArtifactsDirectory)
                 .SetConfiguration(Configuration.Release)
                 .EnableNoBuild()

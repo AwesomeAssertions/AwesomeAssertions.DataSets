@@ -69,7 +69,7 @@ Please do:
 * Target the [Pull Request](https://help.github.com/articles/using-pull-requests) at the `main` branch.
 * Follow the style presented in the [Coding Guidelines for C#](https://csharpcodingguidelines.com/).
 * Align with the Awesome Assertions [Design Principles](https://github.com/AwesomeAssertions/AwesomeAssertions/wiki/Design-Guidelines)
-* Ensure that changes are covered by a new or existing set of unit tests which follow the Arrange-Act-Assert syntax such as is used [in this example](https://github.com/AwesomeAssertions/AwesomeAssertions/blob/main/Tests/FluentAssertions.Equivalency.Specs/BasicSpecs.cs#L13).
+* Ensure that changes are covered by a new or existing set of unit tests which follow the Arrange-Act-Assert syntax such as is used [in this example](https://github.com/AwesomeAssertions/AwesomeAssertions/blob/main/Tests/AwesomeAssertions.Equivalency.Specs/BasicSpecs.cs#L13).
 * If the contribution changes the public API, the changes needs to be included by running [`AcceptApiChanges.ps1`](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/blob/main/AcceptApiChanges.ps1)/[`AcceptApiChanges.sh`](https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets/blob/main/AcceptApiChanges.sh) or using Rider's [Verify Support](https://plugins.jetbrains.com/plugin/17240-verify-support) plug-in.
 
 Please do not:

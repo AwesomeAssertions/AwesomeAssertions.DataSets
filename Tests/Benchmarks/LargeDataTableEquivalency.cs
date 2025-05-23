@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Linq;
+using AwesomeAssertions;
+using AwesomeAssertions.DataSets;
 using BenchmarkDotNet.Attributes;
 using Bogus;
-using FluentAssertions;
-using FluentAssertions.DataSets;
 
 namespace Benchmarks;
 

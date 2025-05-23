@@ -1,0 +1,181 @@
+﻿[assembly: AwesomeAssertions.CustomAssertionsAssembly]
+[assembly: AwesomeAssertions.Extensibility.AssertionEngineInitializer(typeof(AwesomeAssertions.DataSets.InitializeDataSetSupport), "Initialize")]
+[assembly: System.Reflection.AssemblyMetadata("RepositoryUrl", "https://github.com/AwesomeAssertions/AwesomeAssertions.DataSets")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo(@"AwesomeAssertions.DataSets.Specs, PublicKey=00240000048000009400000006020000002400005253413100040000010001002d25ff515c85b13ba08f61d466cff5d80a7f28ba197bbf8796085213e7a3406f970d2a4874932fed35db546e89af2da88c194bf1b7f7ac70de7988c78406f7629c547283061282a825616eb7eb48a9514a7570942936020a9bb37dca9ff60b778309900851575614491c6d25018fadb75828f4c7a17bf2d7dc86e7b6eafc5d8f")]
+namespace AwesomeAssertions
+{
+    public static class AssertionExtensions
+    {
+        public static AwesomeAssertions.DataSets.DataColumnAssertions Should(this System.Data.DataColumn actualValue) { }
+        public static AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn> Should(this System.Data.DataColumnCollection actualValue) { }
+        public static AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow> Should(this System.Data.DataRowCollection actualValue) { }
+        public static AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> Should(this System.Data.DataTableCollection actualValue) { }
+    }
+    public static class DataColumnCollectionAssertionExtensions
+    {
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn>> BeSameAs(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn> assertion, System.Data.DataColumnCollection expected, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn>> HaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn> assertion, System.Data.DataColumnCollection otherCollection, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn>> NotBeSameAs(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn> assertion, System.Data.DataColumnCollection unexpected, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn>> NotHaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn> assertion, System.Data.DataColumnCollection otherCollection, string because = "", params object[] becauseArgs) { }
+    }
+    public static class DataRowAssertionExtensions
+    {
+        public static AwesomeAssertions.DataSets.DataRowAssertions<TDataRow> Should<TDataRow>(this TDataRow actualValue)
+            where TDataRow : System.Data.DataRow { }
+    }
+    public static class DataRowCollectionAssertionExtensions
+    {
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow>> BeSameAs(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow> assertion, System.Data.DataRowCollection expected, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow>> HaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow> assertion, System.Data.DataRowCollection otherCollection, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow>> NotBeSameAs(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow> assertion, System.Data.DataRowCollection unexpected, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow>> NotHaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow> assertion, System.Data.DataRowCollection otherCollection, string because = "", params object[] becauseArgs) { }
+    }
+    public static class DataSetAssertionExtensions
+    {
+        public static AwesomeAssertions.DataSets.DataSetAssertions<TDataSet> Should<TDataSet>(this TDataSet actualValue)
+            where TDataSet : System.Data.DataSet { }
+    }
+    public static class DataTableAssertionExtensions
+    {
+        public static AwesomeAssertions.DataSets.DataTableAssertions<TDataTable> Should<TDataTable>(this TDataTable actualValue)
+            where TDataTable : System.Data.DataTable { }
+    }
+    public static class DataTableCollectionAssertionExtensions
+    {
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable>> BeSameAs(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> assertion, System.Data.DataTableCollection expected, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable>> HaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> assertion, System.Data.DataSet otherDataSet, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable>> HaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> assertion, System.Data.DataTableCollection otherCollection, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable>> NotBeSameAs(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> assertion, System.Data.DataTableCollection unexpected, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable>> NotHaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> assertion, System.Data.DataSet otherDataSet, string because = "", params object[] becauseArgs) { }
+        public static AwesomeAssertions.AndConstraint<AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable>> NotHaveSameCount(this AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> assertion, System.Data.DataTableCollection otherCollection, string because = "", params object[] becauseArgs) { }
+    }
+}
+namespace AwesomeAssertions.DataSets
+{
+    public class DataColumnAssertions : AwesomeAssertions.Primitives.ReferenceTypeAssertions<System.Data.DataColumn, AwesomeAssertions.DataSets.DataColumnAssertions>
+    {
+        public DataColumnAssertions(System.Data.DataColumn dataColumn, AwesomeAssertions.Execution.AssertionChain assertionChain) { }
+        protected override string Identifier { get; }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataColumnAssertions> BeEquivalentTo(System.Data.DataColumn expectation, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataColumnAssertions> BeEquivalentTo(System.Data.DataColumn expectation, System.Func<AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataColumn>, AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataColumn>> config, string because = "", params object[] becauseArgs) { }
+    }
+    public class DataRowAssertions<TDataRow> : AwesomeAssertions.Primitives.ReferenceTypeAssertions<TDataRow, AwesomeAssertions.DataSets.DataRowAssertions<TDataRow>>
+        where TDataRow : System.Data.DataRow
+    {
+        public DataRowAssertions(TDataRow dataRow, AwesomeAssertions.Execution.AssertionChain assertionChain) { }
+        protected override string Identifier { get; }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataRowAssertions<TDataRow>> BeEquivalentTo(System.Data.DataRow expectation, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataRowAssertions<TDataRow>> BeEquivalentTo(System.Data.DataRow expectation, System.Func<AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataRow>, AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataRow>> config, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndWhichConstraint<AwesomeAssertions.DataSets.DataRowAssertions<TDataRow>, System.Data.DataColumn> HaveColumn(string expectedColumnName, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataRowAssertions<TDataRow>> HaveColumns(params string[] expectedColumnNames) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataRowAssertions<TDataRow>> HaveColumns(System.Collections.Generic.IEnumerable<string> expectedColumnNames, string because = "", params object[] becauseArgs) { }
+    }
+    public class DataSetAssertions<TDataSet> : AwesomeAssertions.Primitives.ReferenceTypeAssertions<System.Data.DataSet, AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>>
+        where TDataSet : System.Data.DataSet
+    {
+        public DataSetAssertions(TDataSet dataSet, AwesomeAssertions.Execution.AssertionChain assertionChain) { }
+        protected override string Identifier { get; }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>> BeEquivalentTo(System.Data.DataSet expectation, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>> BeEquivalentTo(System.Data.DataSet expectation, System.Func<AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataSet>, AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataSet>> config, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndWhichConstraint<AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>, System.Data.DataTable> HaveTable(string expectedTableName, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>> HaveTableCount(int expected, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>> HaveTables(params string[] expectedTableNames) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataSetAssertions<TDataSet>> HaveTables(System.Collections.Generic.IEnumerable<string> expectedTableNames, string because = "", params object[] becauseArgs) { }
+    }
+    public class DataTableAssertions<TDataTable> : AwesomeAssertions.Primitives.ReferenceTypeAssertions<System.Data.DataTable, AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>>
+        where TDataTable : System.Data.DataTable
+    {
+        public DataTableAssertions(TDataTable dataTable, AwesomeAssertions.Execution.AssertionChain assertionChain) { }
+        protected override string Identifier { get; }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>> BeEquivalentTo(System.Data.DataTable expectation, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>> BeEquivalentTo(System.Data.DataTable expectation, System.Func<AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataTable>, AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<System.Data.DataTable>> config, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndWhichConstraint<AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>, System.Data.DataColumn> HaveColumn(string expectedColumnName, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>> HaveColumns(params string[] expectedColumnNames) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>> HaveColumns(System.Collections.Generic.IEnumerable<string> expectedColumnNames, string because = "", params object[] becauseArgs) { }
+        public AwesomeAssertions.AndConstraint<AwesomeAssertions.DataSets.DataTableAssertions<TDataTable>> HaveRowCount(int expected, string because = "", params object[] becauseArgs) { }
+    }
+    public static class EquivalencyAssertionOptionsExtensions
+    {
+        public static void AddDataSetSupport(this AwesomeAssertions.Equivalency.EquivalencyPlan plan) { }
+    }
+    public interface IDataEquivalencyAssertionOptions<T> : AwesomeAssertions.Equivalency.IEquivalencyOptions
+    {
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> AllowingMismatchedTypes();
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> Excluding(System.Linq.Expressions.Expression<System.Func<AwesomeAssertions.Equivalency.IMemberInfo, bool>> predicate);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> Excluding(System.Linq.Expressions.Expression<System.Func<T, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumn(System.Data.DataColumn column);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumn(string tableName, string columnName);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumnInAllTables(string columnName);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumns(System.Collections.Generic.IEnumerable<System.Data.DataColumn> columns);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumns(params System.Data.DataColumn[] columns);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumns(string tableName, System.Collections.Generic.IEnumerable<string> columnNames);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumns(string tableName, params string[] columnNames);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumnsInAllTables(System.Collections.Generic.IEnumerable<string> columnNames);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingColumnsInAllTables(params string[] columnNames);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingOriginalData();
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.Constraint, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.DataColumn, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.DataRelation, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.DataRow, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.DataTable, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.ForeignKeyConstraint, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingRelated(System.Linq.Expressions.Expression<System.Func<System.Data.UniqueConstraint, object>> expression);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingTable(string tableName);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingTables(System.Collections.Generic.IEnumerable<string> tableNames);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> ExcludingTables(params string[] tableNames);
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> IgnoringUnmatchedColumns();
+        AwesomeAssertions.DataSets.IDataEquivalencyAssertionOptions<T> UsingRowMatchMode(AwesomeAssertions.DataSets.RowMatchMode rowMatchMode);
+    }
+    public static class InitializeDataSetSupport
+    {
+        public static void Initialize() { }
+    }
+    public enum RowMatchMode
+    {
+        Index = 0,
+        PrimaryKey = 1,
+    }
+}
+namespace AwesomeAssertions.DataSets.Equivalency
+{
+    public class ConstraintCollectionEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.ConstraintCollection>
+    {
+        public ConstraintCollectionEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class ConstraintEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.Constraint>
+    {
+        public ConstraintEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class DataColumnEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.DataColumn>
+    {
+        public DataColumnEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class DataRelationEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.DataRelation>
+    {
+        public DataRelationEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class DataRowCollectionEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.DataRowCollection>
+    {
+        public DataRowCollectionEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class DataRowEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.DataRow>
+    {
+        public DataRowEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class DataSetEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.DataSet>
+    {
+        public DataSetEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+    public class DataTableEquivalencyStep : AwesomeAssertions.Equivalency.EquivalencyStep<System.Data.DataTable>
+    {
+        public DataTableEquivalencyStep() { }
+        protected override AwesomeAssertions.Equivalency.EquivalencyResult OnHandle(AwesomeAssertions.Equivalency.Comparands comparands, AwesomeAssertions.Equivalency.IEquivalencyValidationContext context, AwesomeAssertions.Equivalency.IValidateChildNodeEquivalency nestedValidator) { }
+    }
+}
