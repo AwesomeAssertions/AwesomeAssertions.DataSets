@@ -39,7 +39,8 @@
         },
         {
             "matchPackageNames": [ "*" ],
-            "schedule": [ "after 4pm on monday" ]
+            "description": "Every month on the first day of the month",
+            "schedule": [ "* * 1 * *" ]
         }
     ]
 }
