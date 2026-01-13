@@ -6,13 +6,9 @@ namespace AwesomeAssertions
 {
     public static class AssertionExtensions
     {
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.DataSets.DataColumnAssertions Should(this System.Data.DataColumn actualValue) { }
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataColumn> Should(this System.Data.DataColumnCollection actualValue) { }
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataRow> Should(this System.Data.DataRowCollection actualValue) { }
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.Collections.GenericCollectionAssertions<System.Data.DataTable> Should(this System.Data.DataTableCollection actualValue) { }
     }
     public static class DataColumnCollectionAssertionExtensions
@@ -24,7 +20,6 @@ namespace AwesomeAssertions
     }
     public static class DataRowAssertionExtensions
     {
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.DataSets.DataRowAssertions<TDataRow> Should<TDataRow>(this TDataRow actualValue)
             where TDataRow : System.Data.DataRow { }
     }
@@ -37,13 +32,11 @@ namespace AwesomeAssertions
     }
     public static class DataSetAssertionExtensions
     {
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.DataSets.DataSetAssertions<TDataSet> Should<TDataSet>(this TDataSet actualValue)
             where TDataSet : System.Data.DataSet { }
     }
     public static class DataTableAssertionExtensions
     {
-        [JetBrains.Annotations.Pure]
         public static AwesomeAssertions.DataSets.DataTableAssertions<TDataTable> Should<TDataTable>(this TDataTable actualValue)
             where TDataTable : System.Data.DataTable { }
     }
