@@ -516,6 +516,7 @@ public class DataTableSpecs : DataSpecs
         dataTable1.Should().BeEquivalentTo(dataTable2, options => options.Excluding(dataTable => dataTable.Prefix));
     }
 
+#if !NET7_0_OR_GREATER
     [Fact]
     public void
         When_data_table_remoting_format_does_not_match_and_the_corresponding_property_is_not_excluded_equivalence_test_should_fail()
@@ -563,6 +564,7 @@ public class DataTableSpecs : DataSpecs
         // Act & Assert
         dataTable1.Should().BeEquivalentTo(dataTable2, options => options.Excluding(dataTable => dataTable.RemotingFormat));
     }
+#endif
 
     [Theory]
     [MemberData(nameof(AllChangeTypes))]

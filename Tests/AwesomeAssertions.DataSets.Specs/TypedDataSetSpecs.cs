@@ -338,6 +338,7 @@ public class TypedDataSetSpecs : DataSpecs
         dataSet1.Should().BeEquivalentTo(dataSet2, options => options.Excluding(dataSet => dataSet.Prefix));
     }
 
+#if !NET7_0_OR_GREATER
     [Fact]
     public void When_RemotingFormat_does_not_match_and_property_is_not_excluded_it_should_fail()
     {
@@ -376,6 +377,7 @@ public class TypedDataSetSpecs : DataSpecs
             .Excluding(dataSet => dataSet.RemotingFormat)
             .ExcludingRelated(dataTable => dataTable.RemotingFormat));
     }
+#endif
 
     [Fact]
     public void When_SchemaSerializationMode_does_not_match_and_property_is_not_excluded_it_should_fail()
