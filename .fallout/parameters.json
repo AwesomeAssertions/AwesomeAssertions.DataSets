@@ -1,4 +1,4 @@
 {
   "$schema": "./build.schema.json",
-  "Solution": "AwesomeAssertions.DataSets.sln"
+  "Solution": "AwesomeAssertions.DataSets.slnx"
 }
