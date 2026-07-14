@@ -4,16 +4,16 @@
     <TargetFramework>net10.0</TargetFramework>
     <RootNamespace></RootNamespace>
     <NoWarn>CS0649;CS0169</NoWarn>
-    <NukeRootDirectory>..\</NukeRootDirectory>
-    <NukeScriptDirectory>..\</NukeScriptDirectory>
-    <NukeTelemetryVersion>1</NukeTelemetryVersion>
+    <FalloutRootDirectory>..\</FalloutRootDirectory>
+    <FalloutScriptDirectory>..\</FalloutScriptDirectory>
+    <FalloutTelemetryVersion>1</FalloutTelemetryVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageDownload Include="GitVersion.Tool" Version="[6.5.1]" />
     <PackageDownload Include="ReportGenerator" Version="[5.5.0]" />
     <PackageDownload Include="xunit.runner.console" Version="[2.9.3]" />
     <PackageReference Include="LibGit2Sharp" Version="0.31.0" />
-    <PackageReference Include="Nuke.Common" Version="10.1.0" />
-    <PackageReference Include="Nuke.Components" Version="10.1.0" />
+    <PackageReference Include="Fallout.Common" Version="10.3.49" />
+    <PackageReference Include="Fallout.Components" Version="10.3.49" />
   </ItemGroup>
 </Project>
