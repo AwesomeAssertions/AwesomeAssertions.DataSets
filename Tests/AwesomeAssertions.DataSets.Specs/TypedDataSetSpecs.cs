@@ -1,4 +1,5 @@
-﻿using System;
+﻿#pragma warning disable S1192 // String literals should not be duplicated: Is irrelevant for tests
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
@@ -338,7 +339,7 @@ public class TypedDataSetSpecs : DataSpecs
         dataSet1.Should().BeEquivalentTo(dataSet2, options => options.Excluding(dataSet => dataSet.Prefix));
     }
 
-#if !NET7_0_OR_GREATER
+#if !NET
     [Fact]
     public void When_RemotingFormat_does_not_match_and_property_is_not_excluded_it_should_fail()
     {

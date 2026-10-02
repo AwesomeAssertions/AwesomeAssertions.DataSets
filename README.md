@@ -33,14 +33,13 @@ This package is shipped as a [NuGet package](https://www.nuget.org/packages/Awes
 
 ## Prerequisites
 
-* Visual Studio 2022 or JetBrains Rider 2021.3
-* Build Tools 2022 (including the Universal Windows Platform build tools).
-* .NET Framework 4.7 SDK
-* .NET 8.0 SDK installed. Check the `global.json`` for the current minimum required version.
+* Visual Studio 2026 18.0+ or JetBrains Rider 2025.3
+* .NET Framework 4.7.2 SDK
+* .NET 10.0 SDK installed. Check the `global.json`` for the current minimum required version.
 
 ## Building
 
-You can either build the solution using Visual Studio or Rider, or use the `build.ps1` script to kick-off the [Nuke](https://nuke.build/) build process. This will build the package and run all tests.
+You can either build the solution using Visual Studio or Rider, or use the `build.ps1` script to kick-off the [Fallout](https://fallout.build/) build process. This will build the package and run all tests.
 
 ## Approval Tests
 This is a special set of tests that use the [Verify](https://github.com/VerifyTests/Verify) project to verify whether you've introduced any breaking changes in the public API of the library.

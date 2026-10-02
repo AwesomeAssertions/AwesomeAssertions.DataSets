@@ -4,17 +4,12 @@
     <BuildType Name="Debug" />
     <BuildType Name="Release" />
   </Configurations>
-  <Folder Name="/Core/">
-    <Project Path="Src/AwesomeAssertions.DataSets/AwesomeAssertions.DataSets.csproj">
-      <BuildType Solution="CI|*" Project="Release" />
-    </Project>
-  </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".editorconfig" />
     <File Path="Directory.Build.props" />
+    <File Path="global.json" />
     <File Path="nuget.config" />
     <File Path="README.md" />
-    <File Path="Tests/Default.testsettings" />
   </Folder>
   <Folder Name="/Specs/">
     <File Path="Tests/.editorconfig" />
@@ -28,11 +23,13 @@
       <BuildType Solution="CI|*" Project="Debug" />
     </Project>
   </Folder>
+  <Folder Name="/Src/">
+    <Project Path="Src/AwesomeAssertions.DataSets/AwesomeAssertions.DataSets.csproj">
+      <BuildType Solution="CI|*" Project="Release" />
+    </Project>
+  </Folder>
   <Project Path="Build/_build.csproj">
     <BuildType Solution="CI|*" Project="Release" />
     <Build Project="false" />
   </Project>
-  <Properties Name="MonoDevelopProperties">
-    <Property Name="StartupItem" Value="Src\AwesomeAssertions\AwesomeAssertions.csproj" />
-  </Properties>
 </Solution>

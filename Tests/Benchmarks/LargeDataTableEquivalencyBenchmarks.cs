@@ -67,18 +67,20 @@ public class LargeDataTableEquivalencyBenchmarks
         };
     }
 
+#pragma warning disable CA1859 // Use concrete types when possible for improved performance: False positive
     private static object GetDefault(Faker faker, Type columnType)
+#pragma warning restore CA1859
     {
         if (columnType == typeof(TimeSpan))
         {
-            return faker.Date.Future() - faker.Date.Future();
+            return faker.Date.Future() - faker.Date.Future(2);
         }
         else if (columnType == typeof(Guid))
         {
             return faker.Random.Guid();
         }
 
-        throw new Exception("Unable to populate column of type " + columnType);
+        throw new InvalidOperationException($"Unable to populate column of type {columnType}");
     }
 
     private static DataTable CreateDataTable()
