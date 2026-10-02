@@ -387,7 +387,7 @@ public class TypedDataTableSpecs : DataSpecs
         dataTable1.Should().BeEquivalentTo(dataTable2, options => options.Excluding(dataTable => dataTable.Prefix));
     }
 
-#if !NET7_0_OR_GREATER
+#if !NET
     [Fact]
     public void When_RemotingFormat_does_not_match_and_property_is_not_excluded_it_should_fail()
     {

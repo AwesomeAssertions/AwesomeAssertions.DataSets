@@ -23,7 +23,7 @@ jobs:
           8.0.x
           10.0.x
 
-    - name: Run NUKE
+    - name: Run FALLOUT
       run: ./build.ps1
       env:
         NuGetApiKey: ${{ secrets.NUGETAPIKEY }}
@@ -62,9 +62,8 @@ jobs:
       uses: actions/setup-dotnet@v6
       with:
         dotnet-version: |
-          6.0.x
           8.0.x
           10.0.x
 
-    - name: Run NUKE
+    - name: Run FALLOUT
       run: ./build.sh UnitTests

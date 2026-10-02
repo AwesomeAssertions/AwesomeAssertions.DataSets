@@ -222,6 +222,9 @@ dotnet_diagnostic.S101.severity = none
 # Remove the unused private method
 dotnet_diagnostic.S1144.severity = none
 
+# String literals should not be duplicated
+dotnet_diagnostic.S1192.severity = none
+
 # Remove this empty class, write its code or make it an "interface"
 dotnet_diagnostic.S2094.severity = none
 

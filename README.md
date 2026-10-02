@@ -35,8 +35,8 @@ This package is shipped as a [NuGet package](https://www.nuget.org/packages/Awes
 
 * Visual Studio 2022 or JetBrains Rider 2021.3
 * Build Tools 2022 (including the Universal Windows Platform build tools).
-* .NET Framework 4.7 SDK
-* .NET 8.0 SDK installed. Check the `global.json`` for the current minimum required version.
+* .NET Framework 4.72 SDK
+* .NET 10.0 SDK installed. Check the `global.json`` for the current minimum required version.
 
 ## Building
 
