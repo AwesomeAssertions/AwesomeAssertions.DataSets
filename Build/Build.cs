@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Fallout.Common;
 using Fallout.Common.CI.GitHubActions;
@@ -10,25 +11,17 @@ using Fallout.Common.Tools.DotNet;
 using Fallout.Common.Tools.GitVersion;
 using Fallout.Common.Tools.ReportGenerator;
 using Fallout.Common.Tools.Xunit;
-using Fallout.Common.Utilities;
 using Fallout.Common.Utilities.Collections;
 using static Fallout.Common.Tools.DotNet.DotNetTasks;
 using static Fallout.Common.Tools.ReportGenerator.ReportGeneratorTasks;
-using static Fallout.Common.Tools.Xunit.XunitTasks;
-using static Serilog.Log;
 
 [UnsetVisualStudioEnvironmentVariables]
 [DotNetVerbosityMapping]
 class Build : FalloutBuild
 {
-    /* Support plugins are available for:
-       - JetBrains ReSharper        https://nuke.build/resharper
-       - JetBrains Rider            https://nuke.build/rider
-       - Microsoft VisualStudio     https://nuke.build/visualstudio
-       - Microsoft VSCode           https://nuke.build/vscode
-    */
+    const string NetFrameworkVersion = "net472";
 
-    public static int Main() => Execute<Build>(x => x.Push, x => x.Push);
+    public static int Main() => Execute<Build>(x => x.Push);
 
     GitHubActions GitHubActions => GitHubActions.Instance;
 
@@ -36,226 +29,167 @@ class Build : FalloutBuild
 
     string BuildNumber => GitHubActions?.RunNumber.ToString();
 
-    [Parameter("Use this parameter if you encounter build problems in any way, " +
-        "to generate a .binlog file which holds some useful information.")]
-    readonly bool? GenerateBinLog;
-
     [Parameter("The key to push to Nuget")]
     [Secret]
-    readonly string NuGetApiKey;
+    readonly string ApiKey;
 
     [Solution(GenerateProjects = true)]
     readonly Solution Solution;
 
-    [GitVersion(Framework = "net10.0", NoCache = true, NoFetch = true)]
+    [GitVersion(Framework = "net10.0")]
     readonly GitVersion GitVersion;
 
-    AbsolutePath ArtifactsDirectory => RootDirectory / "Artifacts";
+    static AbsolutePath SourceDirectory => RootDirectory / "Src";
 
-    AbsolutePath TestResultsDirectory => RootDirectory / "TestResults";
+    static AbsolutePath TestsDirectory => RootDirectory / "Tests";
+
+    static AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
+
+    static AbsolutePath TestResultsDirectory => RootDirectory / "TestResults";
+
+    /// <summary>
+    /// We need to provide test settings.
+    /// By default, code with [DebuggerNonUserCode] is excluded.
+    /// But this is used several times in our code.
+    /// We can use the "runsettings" format (VSTest) also for the MTP platform tests.
+    /// </summary>
+    static AbsolutePath CoverageSettingsFile => RootDirectory / "Tests" / "CodeCoverage.runsettings";
 
     string SemVer;
 
-    Target Clean => _ => _
+#pragma warning disable S2325 // Methods and properties that don’t access instance data should be static: Doesn't work when this is static
+    Target Clean => d => d
+#pragma warning restore S2325
         .Executes(() =>
         {
+            SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(path => path.DeleteDirectory());
+            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(path => path.DeleteDirectory());
             ArtifactsDirectory.CreateOrCleanDirectory();
-            TestResultsDirectory.CreateOrCleanDirectory();
         });
 
-    Target CalculateNugetVersion => _ => _
+    Target CalculateNugetVersion => d => d
         .Executes(() =>
         {
             SemVer = GitVersion.SemVer;
             if (IsPullRequest)
             {
-                Information(
-                    "Branch spec {branchspec} is a pull request. Adding build number {buildnumber}",
+                Serilog.Log.Information(
+                    "Branch spec {BranchSpec} is a pull request. Adding build number {BuildNumber}",
                     BranchSpec, BuildNumber);
 
                 SemVer = string.Join('.', GitVersion.SemVer.Split('.').Take(3).Union(new[] { BuildNumber }));
             }
 
-            Information("SemVer = {semver}", SemVer);
+            Serilog.Log.Information("SemVer = {SemVer}", SemVer);
         });
 
     bool IsPullRequest => GitHubActions?.IsPullRequest ?? false;
 
-    Target Restore => _ => _
+    Target Restore => d => d
         .DependsOn(Clean)
         .Executes(() =>
         {
             DotNetRestore(s => s
-                .SetProjectFile(Solution)
-                .EnableNoCache()
-                .SetConfigFile(RootDirectory / "nuget.config"));
+                .SetProjectFile(Solution));
         });
 
-    Target Compile => _ => _
+    Target Compile => d => d
         .DependsOn(Restore)
         .Executes(() =>
         {
-            ReportSummary(s => s
-                .WhenNotNull(GitVersion, (_, o) => _
-                    .AddPair("Version", o.SemVer)));
-
             DotNetBuild(s => s
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration.CI)
-                .When(GenerateBinLog is true, _ => _
-                    .SetBinaryLog(ArtifactsDirectory / $"{Solution.Core.AwesomeAssertions_DataSets.Name}.binlog")
-                )
                 .EnableNoLogo()
-                .EnableNoRestore()
-                .SetAssemblyVersion(GitVersion.AssemblySemVer)
-                .SetFileVersion(GitVersion.AssemblySemFileVer)
-                .SetInformationalVersion(GitVersion.InformationalVersion));
+                .EnableNoRestore());
         });
 
-    Target ApiChecks => _ => _
+    Target ApiChecks => d => d
         .DependsOn(Compile)
         .Executes(() =>
         {
-            Project project = Solution.Specs.Approval_Tests;
+            DotNetTest(s => s
+                    .SetConfiguration(Configuration.Release)
+                    .SetProcessEnvironmentVariable("DOTNET_CLI_UI_LANGUAGE", "en-US")
+                    .EnableNoBuild()
+                    .SetResultsDirectory(TestResultsDirectory)
+                    .CombineWith(cc => cc.SetProjectFile(Solution.Specs.Approval_Tests)),
+                completeOnFailure: true);
+        });
+
+    Target UnitTests => d => d
+        .DependsOn(Compile)
+        .Executes(() =>
+        {
+            IEnumerable<string> frameworks = Solution.Specs.AwesomeAssertions_DataSets_Specs.GetTargetFrameworks();
+            if (!EnvironmentInfo.IsWin)
+                frameworks = frameworks.Except([NetFrameworkVersion]);
 
             DotNetTest(s => s
-                .SetConfiguration(Configuration.Release)
-                .SetProcessEnvironmentVariable("DOTNET_CLI_UI_LANGUAGE", "en-US")
-                .EnableNoBuild()
-                .SetResultsDirectory(TestResultsDirectory)
-                .CombineWith(cc => cc
-                    .SetProjectFile(project)
-                    .AddLoggers($"trx;LogFileName={project.Name}.trx")), completeOnFailure: true);
-
-            ReportTestOutcome(globFilters: $"*{project.Name}.trx");
-        });
-
-    Project[] Projects => new[]
-    {
-        Solution.Specs.AwesomeAssertions_DataSets_Specs,
-    };
-
-    Target UnitTestsNetFramework => _ => _
-        .Unlisted()
-        .DependsOn(Compile)
-        .OnlyWhenStatic(() => EnvironmentInfo.IsWin)
-        .Executes(() =>
-        {
-            string[] testAssemblies = Projects
-                    .SelectMany(project => project.Directory.GlobFiles("bin/Debug/net47/*.Specs.dll"))
-                    .Select(_ => _.ToString())
-                    .ToArray();
-
-            Assert.NotEmpty(testAssemblies.ToList());
-
-            Xunit2(s => s
-                .SetFramework("net47")
-                .AddTargetAssemblies(testAssemblies)
-            );
-        });
-
-    Target UnitTestsNetCore => _ => _
-        .Unlisted()
-        .DependsOn(Compile)
-        .Executes(() =>
-        {
-            const string NET47 = "net47";
-
-            DotNetTest(s => s
-                .SetConfiguration(Configuration.Debug)
-                .SetProcessEnvironmentVariable("DOTNET_CLI_UI_LANGUAGE", "en-US")
-                .EnableNoBuild()
-                .SetDataCollector("XPlat Code Coverage")
-                .SetResultsDirectory(TestResultsDirectory)
-                .AddRunSetting(
-                    "DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.DoesNotReturnAttribute",
-                    "DoesNotReturnAttribute")
-                .CombineWith(
-                    Projects,
-                    (_, project) => _
-                        .SetProjectFile(project)
-                        .CombineWith(
-                            project.GetTargetFrameworks().Except(new[] { NET47 }),
-                            (_, framework) => _
+                    .SetConfiguration(Configuration.Debug)
+                    .SetProjectFile(Solution.Specs.AwesomeAssertions_DataSets_Specs)
+                    .SetProcessEnvironmentVariable("DOTNET_CLI_UI_LANGUAGE", "en-US")
+                    .SetResultsDirectory(TestResultsDirectory)
+                    .EnableNoBuild()
+                    .CombineWith(
+                        frameworks,
+                        (settings, framework) =>
+                        {
+                            var coverageFile = $"{framework}.cobertura.xml";
+                            return settings
                                 .SetFramework(framework)
-                                .AddLoggers($"trx;LogFileName={project.Name}_{framework}.trx")
-                        )
-                ), completeOnFailure: true
-            );
-
-            ReportTestOutcome(globFilters: $"*[!*{NET47}].trx");
+                                .SetProcessAdditionalArguments(
+                                    "--coverage",
+                                    $"--coverage-output={coverageFile}",
+                                    "--report-trx",
+                                    "--report-trx-filename",
+                                    $"{framework}.trx",
+                                    "--coverage-settings",
+                                    CoverageSettingsFile);
+                        }),
+                completeOnFailure: true);
         });
 
-    Target UnitTests => _ => _
-        .DependsOn(UnitTestsNetFramework)
-        .DependsOn(UnitTestsNetCore);
-
-    static string[] Outcomes(AbsolutePath path)
-        => XmlTasks.XmlPeek(
-                path,
-                "/xn:TestRun/xn:Results/xn:UnitTestResult/@outcome",
-                ("xn", "http://microsoft.com/schemas/VisualStudio/TeamTest/2010")).ToArray();
-
-    void ReportTestOutcome(params string[] globFilters)
-    {
-        var resultFiles = TestResultsDirectory.GlobFiles(globFilters);
-        var outcomes = resultFiles.SelectMany(Outcomes).ToList();
-        var passedTests = outcomes.Count(outcome => outcome is "Passed");
-        var failedTests = outcomes.Count(outcome => outcome is "Failed");
-        var skippedTests = outcomes.Count(outcome => outcome is "NotExecuted");
-
-        ReportSummary(_ => _
-            .When(failedTests > 0, _ => _
-                .AddPair("Failed", failedTests.ToString()))
-            .AddPair("Passed", passedTests.ToString())
-            .When(skippedTests > 0, _ => _
-                .AddPair("Skipped", skippedTests.ToString())));
-    }
-
-    Target CodeCoverage => _ => _
+    Target CodeCoverage => d => d
         .DependsOn(UnitTests)
         .Executes(() =>
         {
+            string generator = NuGetToolPathResolver.GetPackageExecutable(
+                "ReportGenerator", "ReportGenerator.dll", framework: "net10.0");
             ReportGenerator(s => s
-                .SetProcessToolPath(NuGetToolPathResolver.GetPackageExecutable("ReportGenerator", "ReportGenerator.dll", framework: "net10.0"))
+                .SetProcessToolPath(generator)
                 .SetTargetDirectory(TestResultsDirectory / "reports")
-                .AddReports(TestResultsDirectory / "**/coverage.cobertura.xml")
-                .AddReportTypes(
-                    ReportTypes.lcov,
-                    ReportTypes.HtmlInline_AzurePipelines_Dark)
-                .AddFileFilters("-*.g.cs")
+                .AddReports(TestResultsDirectory / "**/*.cobertura.xml")
+                .AddReportTypes("HtmlInline_AzurePipelines_Dark", "lcov")
+                .SetClassFilters("-System.Diagnostics.CodeAnalysis.StringSyntaxAttribute")
                 .SetAssemblyFilters("+AwesomeAssertions.DataSets"));
 
             string link = TestResultsDirectory / "reports" / "index.html";
-            Information($"Code coverage report: \x1b]8;;file://{link.Replace('\\', '/')}\x1b\\{link}\x1b]8;;\x1b\\");
+
+            Serilog.Log.Information("Code coverage report: \x1b]8;;file://{Link}\x1b\\{LinkOriginal}\x1b]8;;\x1b\\",
+                link.Replace('\\', '/'), link);
         });
 
-    Target Pack => _ => _
+    Target Pack => d => d
         .DependsOn(ApiChecks)
         .DependsOn(UnitTests)
         .DependsOn(CodeCoverage)
         .DependsOn(CalculateNugetVersion)
         .Executes(() =>
         {
-            ReportSummary(s => s
-                .WhenNotNull(SemVer, (_, semVer) => _
-                    .AddPair("Packed version", semVer)));
-
             DotNetPack(s => s
-                .SetProject(Solution.Core.AwesomeAssertions_DataSets)
+                .SetProject(Solution.Src.AwesomeAssertions_DataSets)
                 .SetOutputDirectory(ArtifactsDirectory)
-                .SetConfiguration(Configuration.Release)
-                .EnableNoBuild()
+                .SetConfiguration("Release")
                 .EnableNoLogo()
                 .EnableNoRestore()
-                .SetVersion(SemVer)
-                .EnableContinuousIntegrationBuild()); // Necessary for deterministic builds
+                .EnableContinuousIntegrationBuild() // Necessary for deterministic builds
+                .SetVersion(SemVer));
         });
 
-    Target Push => _ => _
+    Target Push => d => d
         .DependsOn(Pack)
         .OnlyWhenDynamic(() => IsTag)
-        .ProceedAfterFailure()
         .Executes(() =>
         {
             var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
@@ -263,7 +197,7 @@ class Build : FalloutBuild
             Assert.NotEmpty(packages);
 
             DotNetNuGetPush(s => s
-                .SetApiKey(NuGetApiKey)
+                .SetApiKey(ApiKey)
                 .EnableSkipDuplicate()
                 .SetSource("https://api.nuget.org/v3/index.json")
                 .EnableNoSymbols()
